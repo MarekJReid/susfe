@@ -1,0 +1,41 @@
+[
+  {
+    "id": "device001",
+    "displayName": "Temperature Sensor 1",
+    "template": "Temperature Sensor Model",
+    "simulated": false,
+    "enabled": true,
+    "provisioned": true,
+    "lastActivity": "2023-08-27T13:30:00Z",
+    "cloudProperties": {
+      "location": "Building A - Floor 1"
+    },
+    "tags": {
+      "location": "west-wing",
+      "type": "sensor"
+    },
+    "telemetry": {
+      "temperature": 23.4,
+      "humidity": 50
+    }
+  },
+  {
+    "id": "device002",
+    "displayName": "Pressure Sensor A",
+    "template": "Pressure Sensor Model",
+    "simulated": true,
+    "enabled": true,
+    "provisioned": false,
+    "lastActivity": "2023-08-26T10:20:00Z",
+    "cloudProperties": {
+      "location": "Building B - Floor 2"
+    },
+    "tags": {
+      "location": "east-wing",
+      "type": "sensor"
+    },
+    "telemetry": {
+      "pressure": 1013.25
+    }
+  }
+]

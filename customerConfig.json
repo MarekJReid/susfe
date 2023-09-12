@@ -1,0 +1,35 @@
+{
+  "companyName": "Software Update Service",
+  "colors": {
+    "primary": "#1a202c",
+    "secondary": "#2d3748",
+    "tertiary": "#4a5568",
+    "accent": "#f56565",
+    "blue": {
+      "100": "#f3f9fd",
+      "200": "#e5f3fa",
+      "300": "#cceafa",
+      "400": "#99d6f6",
+      "500": "#66c1f1",
+      "600": "#59aecd",
+      "700": "#4a8aa8",
+      "800": "#3c6784",
+      "900": "#2d4469"
+    }
+  },
+  "fonts": {
+    "primary": ["Roboto Slab", "sans-serif"],
+    "secondary": ["Roboto", "serif"]
+  },
+  "fontSizes": {
+    "xs": "0.75rem",
+    "sm": "0.875rem",
+    "base": "1rem",
+    "lg": "1.125rem",
+    "xl": "1.25rem",
+    "2xl": "1.5rem",
+    "3xl": "1.875rem",
+    "4xl": "2.25rem",
+    "5xl": "3rem"
+  }
+}

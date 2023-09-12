@@ -1,0 +1,15 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#users/$entity",
+  "id": "12345678-1234-1234-1234-1234567890ab",
+  "businessPhones": ["+1 555-555-5555"],
+  "displayName": "John Doe",
+  "givenName": "John",
+  "jobTitle": "Software Developer",
+  "mail": "john.doe@example.com",
+  "mobilePhone": null,
+  "officeLocation": "Building 123",
+  "preferredLanguage": "en-US",
+  "surname": "Doe",
+  "userPrincipalName": "john.doe@example.com",
+  "photo": "https://images.pexels.com/photos/2381069/pexels-photo-2381069.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+}
