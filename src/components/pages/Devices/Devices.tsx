@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
+import { useDeviceContext } from "../../../contexts/deviceContext";
 import DevicesNavBar from "./DevicesNavBar/DevicesNavBar";
-import DevicesViewWrapper from "./DevicesViewWrapper/DevicesViewWrapper";
-import { fetchDevices } from "../../../api/api";
-import { useQuery } from "react-query";
-import useUniqueOrganizations from "../../../hooks/useUniqueOrganizations";
-import useFilteredDevices from "../../../hooks/useOrganisationFilterForDevices";
+import useFetchDevices from "../../../api/fetchCalls/useFetchDevices";
+import useFetchOrganizations from "../../../api/fetchCalls/useFetchOrganizations";
 
 /**
  * Represents the main Devices page, allowing users to switch between table and card views and filter devices by organization.
@@ -14,31 +12,33 @@ import useFilteredDevices from "../../../hooks/useOrganisationFilterForDevices";
  */
 
 const Devices: React.FC = () => {
-  const [viewMode, setViewMode] = useState<"table" | "card">("table");
-  const [selectedOrganization, setSelectedOrganization] = useState<
-    string | null
-  >(null);
-  const { data: devices, isLoading } = useQuery("devices", fetchDevices);
+  // const [viewMode, setViewMode] = useState<"table" | "card">("table");
+  // const [selectedOrganization, setSelectedOrganization] = useState<
+  //   string | null
+  // >(null);
 
-  const organisations = useUniqueOrganizations(devices || []);
-  const filteredDevices = useFilteredDevices(
-    devices || [],
-    selectedOrganization
-  );
+  // const organisations = useUniqueOrganizations(devices || []);
+  // const filteredDevices = useFilteredDevices(
+  //   devices || [],
+  //   selectedOrganization
+  // );
+  const { organizationsForDropdown, setSelectedOrganization } =
+    useDeviceContext();
 
   return (
     <div className="relative w-full">
       <DevicesNavBar
         onTableClick={() => setViewMode("table")}
         onCardClick={() => setViewMode("card")}
-        organisations={organisations}
+        organisations={organizationsForDropdown}
         setSelectedOrganization={setSelectedOrganization}
       />
+      {/*
       <DevicesViewWrapper
         viewMode={viewMode}
         devices={filteredDevices}
         isLoading={isLoading}
-      />
+      /> */}
     </div>
   );
 };

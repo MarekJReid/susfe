@@ -35,3 +35,9 @@ export interface TemperatureTelemetry {
 export interface PressureTelemetry {
   pressure: number;
 }
+
+export interface Organization {
+  id?: string;
+  displayName: string;
+  children?: Organization[] | undefined;
+}

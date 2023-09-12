@@ -1,11 +1,16 @@
-// api.ts
-// Collection of fetch functions to get data from the API
-export const fetchDevices = () =>
-  fetch("http://localhost:9000/devices").then((res) => res.json());
-export const fetchJobs = () => fetch("/api/v1/jobs").then((res) => res.json());
-export const fetchManifests = () =>
-  fetch("/api/v1/manifests").then((res) => res.json());
-export const fetchDevicesByOrganization = (organization: unknown) =>
-  fetch(`http://localhost:9000/devices?organization=${organization}`).then(
-    (res) => res.json()
-  );
+export async function fetchFromAPI(endpoint: string) {
+  const url = `http://localhost:3333${endpoint}`;
+  const SAMPLE_JWT_TOKEN =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY7ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c";
+  console.log("endpoint", url);
+
+  const response = await fetch(url, {
+    headers: {
+      Authorization: `Bearer ${SAMPLE_JWT_TOKEN}`,
+    },
+  });
+  if (!response.ok) {
+    throw new Error(`API request failed with status ${response.status}`);
+  }
+  return await response.json();
+}

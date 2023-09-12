@@ -17,8 +17,10 @@ import Dropdown from "./OrganisationsFilterDropdown/OrganisationsFilterDropdown"
 export interface DevicesNavBarProps {
   onTableClick: () => void;
   onCardClick: () => void;
-  setSelectedOrganization: React.Dispatch<React.SetStateAction<string | null>>; // Corrected type
-  organisations: string[]; // Corrected type
+  setSelectedOrganization: React.Dispatch<
+    React.SetStateAction<string | null | unknown>
+  >; // Corrected type
+  organisations: string[] | unknown; // Corrected type
 }
 const DevicesNavBar = ({
   onTableClick,

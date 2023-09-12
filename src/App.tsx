@@ -5,7 +5,7 @@
  * @author Marek Reid
  */
 
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClientProvider } from "react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import { Layout } from "./components/Layout/Layout";
@@ -16,11 +16,8 @@ import Protected from "./utils/protectedRoute";
 
 import { Welcome } from "./components/pages/Welcome/Welcome";
 import { useAuth } from "./hooks/useAuth";
-
-/**
- * Initialize the React Query client.
- */
-const queryClient = new QueryClient();
+import { queryClient } from "./api/react-query/queryProvider";
+import Devices from "./components/pages/Devices/Devices";
 
 /**
  * Main application component that serves as the entry point for the application.
@@ -43,14 +40,14 @@ function App(): JSX.Element {
                 </Protected>
               }
             />
-            {/* <Route
+            <Route
               path="/devices"
               element={
                 <Protected isAuthenticated={isAuthenticated}>
                   <Devices />
                 </Protected>
               }
-            /> */}
+            />
           </Routes>
         </Layout>
       </BrowserRouter>

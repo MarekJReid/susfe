@@ -10,6 +10,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./styles/global.css";
 import { AuthProvider } from "./contexts/authContext.tsx";
+import { DeviceProvider } from "./contexts/deviceContext.tsx";
 
 /**
  * Render the root component of the application into the DOM.
@@ -17,8 +18,10 @@ import { AuthProvider } from "./contexts/authContext.tsx";
  */
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <AuthProvider>
-      <App />
-    </AuthProvider>
+    <DeviceProvider>
+      <AuthProvider>
+        <App />
+      </AuthProvider>
+    </DeviceProvider>
   </React.StrictMode>
 );
