@@ -8,10 +8,9 @@
 import { QueryClient, QueryClientProvider } from "react-query";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-import "./App.css";
 import { Layout } from "./components/Layout/Layout";
 import Dashboard from "./components/pages/Dashboard/Dashboard";
-import Devices from "./components/pages/Devices/Devices";
+
 import userData from "./data/msalUserDataSample.json";
 import Protected from "./utils/protectedRoute";
 
@@ -44,14 +43,14 @@ function App(): JSX.Element {
                 </Protected>
               }
             />
-            <Route
+            {/* <Route
               path="/devices"
               element={
                 <Protected isAuthenticated={isAuthenticated}>
                   <Devices />
                 </Protected>
               }
-            />
+            /> */}
           </Routes>
         </Layout>
       </BrowserRouter>

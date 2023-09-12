@@ -1,0 +1,13 @@
+import { render } from "@testing-library/react";
+import App from "../App";
+import { AuthProvider } from "../contexts/authContext";
+
+// Define the type for the children prop
+
+test("renders the App component without errors", () => {
+  render(
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  );
+});
