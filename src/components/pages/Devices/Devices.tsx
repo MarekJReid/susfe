@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDeviceContext } from "../../../contexts/deviceContext";
 import DevicesNavBar from "./DevicesNavBar/DevicesNavBar";
-import useFetchDevices from "../../../api/fetchCalls/useFetchDevices";
-import useFetchOrganizations from "../../../api/fetchCalls/useFetchOrganizations";
+import { useOrganizationContext } from "../../../contexts/organizationsContext";
+import DevicesViewWrapper from "./DevicesViewWrapper/DevicesViewWrapper";
+import LoadingSpinner from "../../dynamic/Spinner/Spinner";
 
 /**
  * Represents the main Devices page, allowing users to switch between table and card views and filter devices by organization.
@@ -12,33 +13,29 @@ import useFetchOrganizations from "../../../api/fetchCalls/useFetchOrganizations
  */
 
 const Devices: React.FC = () => {
-  // const [viewMode, setViewMode] = useState<"table" | "card">("table");
-  // const [selectedOrganization, setSelectedOrganization] = useState<
-  //   string | null
-  // >(null);
+  const [viewMode, setViewMode] = useState<"table" | "card">("table");
+  const { organizationsForDropdown, selectedOrganization } =
+    useOrganizationContext();
 
-  // const organisations = useUniqueOrganizations(devices || []);
-  // const filteredDevices = useFilteredDevices(
-  //   devices || [],
-  //   selectedOrganization
-  // );
-  const { organizationsForDropdown, setSelectedOrganization } =
-    useDeviceContext();
+  const { devices, loadingDevices } = useDeviceContext();
+
+  console.log("selectedOrganization", selectedOrganization);
+
+  if (loadingDevices) return <LoadingSpinner />;
 
   return (
     <div className="relative w-full">
-      <DevicesNavBar
-        onTableClick={() => setViewMode("table")}
-        onCardClick={() => setViewMode("card")}
-        organisations={organizationsForDropdown}
-        setSelectedOrganization={setSelectedOrganization}
-      />
-      {/*
+      {organizationsForDropdown !== null && (
+        <DevicesNavBar
+          onTableClick={() => setViewMode("table")}
+          onCardClick={() => setViewMode("card")}
+        />
+      )}
       <DevicesViewWrapper
         viewMode={viewMode}
-        devices={filteredDevices}
-        isLoading={isLoading}
-      /> */}
+        devices={devices}
+        isLoading={loadingDevices}
+      />{" "}
     </div>
   );
 };

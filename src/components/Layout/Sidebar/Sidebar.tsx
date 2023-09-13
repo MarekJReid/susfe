@@ -11,7 +11,7 @@ import { SidebarProps } from "../../../types/component-types";
  */
 const Sidebar: React.FC<SidebarProps> = ({ items }) => {
   return (
-    <div className="w-64  bg-blue-800 text-white h-screen">
+    <div className="w-64 h-[400vh]  bg-blue-800 text-white h-screen">
       <div className="flex flex-col p-6 space-y-4 ">
         {items.map((item, index) => (
           <SidebarLink to={item} key={index}>

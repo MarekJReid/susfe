@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { useOrganizationContext } from "../../../../contexts/organizationsContext";
 import Heading from "../../../dynamic/Heading/Heading";
 import CardIcon from "./Icons/CardIcon";
 import IconWrapper from "./Icons/IconWrapper";
@@ -17,27 +19,21 @@ import Dropdown from "./OrganisationsFilterDropdown/OrganisationsFilterDropdown"
 export interface DevicesNavBarProps {
   onTableClick: () => void;
   onCardClick: () => void;
-  setSelectedOrganization: React.Dispatch<
-    React.SetStateAction<string | null | unknown>
-  >; // Corrected type
-  organisations: string[] | unknown; // Corrected type
 }
 const DevicesNavBar = ({
   onTableClick,
   onCardClick,
-  setSelectedOrganization,
-  organisations,
 }: DevicesNavBarProps): JSX.Element => {
+  const [selectedOrganization, setSelectedOrganization] = useState<string>("");
+
   const handleOrganizationSelect = (organization: string) => {
     setSelectedOrganization(organization);
   };
 
-  console.log(organisations);
-
   return (
     <div className="flex justify-between items-center p-4  border text-primary">
       <Heading text={"Devices"} className="text-secondary text-2xl"></Heading>
-      <Dropdown options={organisations} onSelect={handleOrganizationSelect} />
+      <Dropdown onSelect={handleOrganizationSelect} />
       <IconWrapper>
         <TableIcon onTableClick={onTableClick} />
         <CardIcon onCardClick={onCardClick} />

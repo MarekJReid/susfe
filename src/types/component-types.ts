@@ -62,11 +62,6 @@ export interface ViewSwitchProps {
   children: ReactNode;
 }
 
-export interface DropdownProps {
-  options: string[];
-  onSelect: (option: string) => void;
-}
-
 /**
  * Props for the Table component.
  *

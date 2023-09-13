@@ -5,6 +5,9 @@ import { DevicesViewProps } from "../../../../types/component-types";
 import LoadingSpinner from "../../../dynamic/Spinner/Spinner";
 import { Table } from "../../../dynamic/table/Table";
 import ViewSwitch from "./ViewSwitchWrapper/ViewSwitchWrapper";
+import useFilteredDevices from "../../../../hooks/useOrganisationFilterForDevices";
+import { useDeviceContext } from "../../../../contexts/deviceContext";
+import { useOrganizationContext } from "../../../../contexts/organizationsContext";
 /**
  * Renders a view of devices in either table or card grid format based on the viewMode prop.
  *
@@ -13,9 +16,7 @@ import ViewSwitch from "./ViewSwitchWrapper/ViewSwitchWrapper";
  *
  * @returns {JSX.Element} The rendered DevicesView component.
  *
- * @example
- * // Example usage of DevicesView component:
- * <DevicesView viewMode="table" devices={devicesData} isLoading={false} />
+
  *
  * @author Marek Reid
  * @date 2nd September 2023
@@ -24,17 +25,20 @@ import ViewSwitch from "./ViewSwitchWrapper/ViewSwitchWrapper";
 const DevicesView = ({
   viewMode,
   isLoading,
-  devices,
 }: DevicesViewProps): JSX.Element => {
+  const { devices } = useDeviceContext();
+  const { selectedOrganization } = useOrganizationContext();
+  const filteredDevices = useFilteredDevices(devices, selectedOrganization);
+
   if (isLoading) return <LoadingSpinner />;
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full">
       {devices && (
         <>
           <ViewSwitch element="table" viewMode={viewMode}>
             <Table
-              data={devices}
+              data={filteredDevices}
               renderers={{
                 lastActivity: (dateString: string) => (
                   <span>{new Date(dateString).toLocaleDateString()}</span>
@@ -45,7 +49,7 @@ const DevicesView = ({
 
           <ViewSwitch element="card" viewMode={viewMode}>
             <CardGrid
-              data={devices}
+              data={filteredDevices}
               renderers={{
                 lastActivity: (dateString: string) => (
                   <span>{new Date(dateString).toLocaleDateString()}</span>

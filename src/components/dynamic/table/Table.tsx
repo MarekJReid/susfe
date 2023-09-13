@@ -19,12 +19,26 @@ export function Table<T extends object>({
   const columns = Object.keys(data[0]) as Array<keyof T>;
 
   return (
-    <table className="w-[20vw] text-left border-collapse">
+    <table
+      className=" text-left border-collapse"
+      style={{
+        tableLayout: "fixed",
+        width: "100%",
+      }}
+    >
       <thead className="font-sans bg-blue-500 text-white">
         <tr>
           {/* Render table headers */}
           {columns.map((column) => (
-            <th key={String(column)} className="p-4 border border-gray-300">
+            <th
+              style={{
+                maxWidth: "20vw",
+                whiteSpace: "pre-wrap",
+                wordWrap: "break-word",
+              }}
+              key={String(column)}
+              className="p-4 border border-gray-300"
+            >
               {headers?.[column] || String(column)}
             </th>
           ))}

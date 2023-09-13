@@ -2,7 +2,6 @@ export async function fetchFromAPI(endpoint: string) {
   const url = `http://localhost:3333${endpoint}`;
   const SAMPLE_JWT_TOKEN =
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY7ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c";
-  console.log("endpoint", url);
 
   const response = await fetch(url, {
     headers: {

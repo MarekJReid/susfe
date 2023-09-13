@@ -16,7 +16,7 @@ const DevicesViewWrapper = ({
   isLoading,
 }: DevicesViewProps): JSX.Element => {
   return (
-    <div className="flex flex-col items-center justify-center bg-gray-100 p-4">
+    <div className="flex relative flex-col items-center justify-center bg-gray-100 p-4">
       <DevicesView
         viewMode={viewMode}
         devices={devices}

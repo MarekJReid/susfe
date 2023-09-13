@@ -37,6 +37,7 @@ export interface PressureTelemetry {
 }
 
 export interface Organization {
+  parent?: Organization | undefined;
   id?: string;
   displayName: string;
   children?: Organization[] | undefined;

@@ -5,8 +5,8 @@ import { fetchFromAPI } from "../api";
 
 const useFetchDevices = (shouldFetchImmediately = true) => {
   const [devices, setDevices] = useState<Device[]>([]);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string | null>(null);
+  const [loadingDevices, setLoading] = useState<boolean>(false);
+  const [errorDevices, setError] = useState<string | null>(null);
 
   const fetchDevices = async () => {
     // <-- Added the 'async' keyword here
@@ -32,7 +32,12 @@ const useFetchDevices = (shouldFetchImmediately = true) => {
     }
   }, [shouldFetchImmediately]);
 
-  return { devices, loading, error, refetch: fetchDevices };
+  return {
+    devices,
+    loadingDevices,
+    errorDevices,
+    refetchDevices: fetchDevices,
+  };
 };
 
 export default useFetchDevices;

@@ -18,6 +18,7 @@ import { Welcome } from "./components/pages/Welcome/Welcome";
 import { useAuth } from "./hooks/useAuth";
 import { queryClient } from "./api/react-query/queryProvider";
 import Devices from "./components/pages/Devices/Devices";
+import useOrganizationsForDropdown from "./hooks/organizations/useOrganizationsForDropdown";
 
 /**
  * Main application component that serves as the entry point for the application.

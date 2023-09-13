@@ -1,5 +1,6 @@
-import React, { useState, useRef, useEffect } from "react";
-import { DropdownProps } from "../../../../../types/component-types";
+import { useEffect, useRef, useState } from "react";
+import { useOrganizationContext } from "../../../../../contexts/organizationsContext";
+import RecurssiveListElement from "../../../../dynamic/RecurssiveListElement/RecurssiveListElement";
 
 /**
  * Dropdown component for selecting options.
@@ -11,17 +12,21 @@ import { DropdownProps } from "../../../../../types/component-types";
  *
  */
 
-const Dropdown: React.FC<DropdownProps> = ({ options, onSelect }) => {
+function Dropdown(): JSX.Element {
   const [isOpen, setIsOpen] = useState(false);
   const [dropdownHeight, setDropdownHeight] = useState("0px");
   const dropdownRef = useRef<HTMLUListElement | null>(null);
+
+  const { organizationsForDropdown } = useOrganizationContext();
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
+  const { setSelectedOrganization } = useOrganizationContext();
+
   const handleOptionSelect = (option: string) => {
-    onSelect(option);
+    setSelectedOrganization(option);
     setIsOpen(false);
   };
 
@@ -33,6 +38,8 @@ const Dropdown: React.FC<DropdownProps> = ({ options, onSelect }) => {
       setDropdownHeight("0px");
     }
   }, [isOpen]);
+
+  console.log(organizationsForDropdown);
 
   return (
     <div className="relative">
@@ -60,24 +67,24 @@ const Dropdown: React.FC<DropdownProps> = ({ options, onSelect }) => {
       </button>
       <ul
         ref={dropdownRef}
-        className="absolute z-10 mt-2 w-48 bg-white border border-gray-300 shadow-lg rounded-md overflow-hidden"
+        className="absolute z-10 mt-2  w-[auto] bg-white border border-gray-300 shadow-lg rounded-md overflow-hidden"
         style={{
           maxHeight: dropdownHeight,
           transition: "max-height 0.3s ease-in-out",
         }}
       >
-        {options.map((option) => (
+        {organizationsForDropdown?.map((option, index) => (
           <li
-            key={option}
-            onClick={() => handleOptionSelect(option)}
-            className="px-4 py-2 cursor-pointer hover:bg-blue-100"
+            key={index}
+            onClick={() => handleOptionSelect(option.id)}
+            className=" px-4 py-6 cursor-pointer hover:bg-blue-100"
           >
-            {option}
+            <RecurssiveListElement organisation={option} />
           </li>
         ))}
       </ul>
     </div>
   );
-};
+}
 
 export default Dropdown;

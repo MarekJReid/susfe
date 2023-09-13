@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Device } from "../types/device-types";
 
 /**
  * Custom hook to filter devices based on the selected organization.
@@ -20,14 +21,16 @@ const useFilteredDevices = (
 ) => {
   // State to store filtered devices
   const [filteredDevices, setFilteredDevices] = useState<Device[]>(devices);
-
+  console.log(selectedOrganization);
   useEffect(() => {
     if (devices && selectedOrganization !== null) {
       // Filter devices based on selected organization
       const filteredDevices = devices.filter(
         (device) =>
-          Array.isArray(device.organizations) &&
-          device.organizations.includes(selectedOrganization)
+          (Array.isArray(device.organizations) &&
+            device.organizations.includes(selectedOrganization)) ||
+          (device.organizations === undefined &&
+            selectedOrganization === "undefined")
       );
       setFilteredDevices(filteredDevices);
     } else {
@@ -40,9 +43,3 @@ const useFilteredDevices = (
 };
 
 export default useFilteredDevices;
-
-// Define the Device interface here
-interface Device {
-  organizations: string[]; // Adjust this type according to your actual data structure
-  // Add other properties as needed
-}

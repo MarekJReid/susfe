@@ -6,7 +6,6 @@ const Protected: React.FC<ProtectedRouteProps> = ({
   isAuthenticated,
   children,
 }) => {
-  console.log(isAuthenticated);
   if (!isAuthenticated) {
     return <Navigate to="/" replace />;
   }
