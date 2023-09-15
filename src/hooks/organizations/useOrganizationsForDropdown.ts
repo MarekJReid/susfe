@@ -19,9 +19,12 @@ export function computeUniqueOrganizationsForDropdown(
 
   return uniqueOrgIds.map((orgId) => {
     const organization = organizations.find((org) => org.id === orgId);
+    console.log(organization, "organization");
+    console.log(orgId, "orgId");
     if (organization) {
       return organization;
     } else {
+      console.log(orgId, "orgId");
       return {
         id: orgId,
         displayName: orgId,

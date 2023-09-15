@@ -17,7 +17,7 @@ const useFetchOrganizations = (shouldFetchImmediately = true) => {
     try {
       // Fetch data from the API endpoint
       const data = await fetchFromAPI("/all-organizations");
-
+      console.log(data);
       // Organize the fetched data into a hierarchical structure
       const organizedData = createOrganizationHeirachy(data);
 
