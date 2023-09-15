@@ -2,8 +2,8 @@ import { Device, Organization } from "../../types/device-types";
 
 export function computeUniqueOrganizationsForDropdown(
   devices: Device[],
-  organizations: Organization[]
-): Organization[] {
+  organizations: unknown[]
+): unknown[] {
   const uniqueOrgIds = devices.reduce<string[]>((acc, device) => {
     if (device.organizations) {
       device.organizations.forEach((orgId: string) => {
@@ -17,18 +17,27 @@ export function computeUniqueOrganizationsForDropdown(
     return acc;
   }, []);
 
-  return uniqueOrgIds.map((orgId) => {
-    const organization = organizations.find((org) => org.id === orgId);
-    console.log(organization, "organization");
-    console.log(orgId, "orgId");
-    if (organization) {
-      return organization;
-    } else {
-      console.log(orgId, "orgId");
-      return {
-        id: orgId,
-        displayName: orgId,
-      };
-    }
-  });
+  // Recursively filter the organizations array
+  const filterOrganizations = (
+    organizations: unknown[],
+    orgIds: string | unknown[]
+  ) => {
+    return organizations.filter((org) => {
+      if (orgIds.includes(org.id)) {
+        return true;
+      }
+      if (org.children) {
+        org.children = filterOrganizations(org.children, orgIds);
+        return org.children.length > 0;
+      }
+      return false;
+    });
+  };
+
+  const filteredOrganizations = filterOrganizations(
+    organizations,
+    uniqueOrgIds
+  );
+
+  console.log("filtered orgs", filteredOrganizations);
 }

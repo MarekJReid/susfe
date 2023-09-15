@@ -10,7 +10,7 @@ const RecurssiveListElement: React.FC<RecursiveComponentProps> = ({
 }) => {
   return (
     <div>
-      <p className="pb-">{organisation.displayName}</p>
+      <p className="pb-">{organisation && organisation.displayName}</p>
       {organisation.children && organisation.children.length > 0 && (
         <span className="pl-4 flex pr-6 mt-6">
           {" "}

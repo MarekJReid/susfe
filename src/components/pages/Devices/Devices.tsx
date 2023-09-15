@@ -14,12 +14,9 @@ import LoadingSpinner from "../../dynamic/Spinner/Spinner";
 
 const Devices: React.FC = () => {
   const [viewMode, setViewMode] = useState<"table" | "card">("table");
-  const { organizationsForDropdown, selectedOrganization } =
-    useOrganizationContext();
+  const { organizationsForDropdown } = useOrganizationContext();
 
   const { devices, loadingDevices } = useDeviceContext();
-
-  console.log("selectedOrganization", selectedOrganization);
 
   if (loadingDevices) return <LoadingSpinner />;
 

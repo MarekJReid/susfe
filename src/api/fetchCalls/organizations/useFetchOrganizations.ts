@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 
 import { Organization } from "../../../types/device-types";
 import { fetchFromAPI } from "../../api";
-import { createOrganizationHeirachy } from "./utils";
+import { createOrganizationHierarchy } from "./utils";
 
 const useFetchOrganizations = (shouldFetchImmediately = true) => {
   const [loadingOrganizations, setLoading] = useState(false);
@@ -17,10 +17,15 @@ const useFetchOrganizations = (shouldFetchImmediately = true) => {
     try {
       // Fetch data from the API endpoint
       const data = await fetchFromAPI("/all-organizations");
-      console.log(data);
-      // Organize the fetched data into a hierarchical structure
-      const organizedData = createOrganizationHeirachy(data);
 
+      // Organize the fetched data into a hierarchical structure
+      const organizedData = createOrganizationHierarchy(data);
+      console.log(
+        organizedData[0],
+        organizedData[1],
+        organizedData[2],
+        organizedData[3]
+      );
       setOrganizationsToSend(organizedData);
       setLoading(false);
       setError(null);

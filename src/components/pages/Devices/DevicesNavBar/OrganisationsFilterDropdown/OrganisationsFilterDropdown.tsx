@@ -72,17 +72,7 @@ function Dropdown(): JSX.Element {
           maxHeight: dropdownHeight,
           transition: "max-height 0.3s ease-in-out",
         }}
-      >
-        {organizationsForDropdown?.map((option, index) => (
-          <li
-            key={index}
-            onClick={() => handleOptionSelect(option.id)}
-            className=" px-4 py-6 cursor-pointer hover:bg-blue-100"
-          >
-            <RecurssiveListElement organisation={option} />
-          </li>
-        ))}
-      </ul>
+      ></ul>
     </div>
   );
 }

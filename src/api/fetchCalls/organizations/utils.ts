@@ -1,24 +1,25 @@
 import { Organization } from "../../../types/device-types";
 
-export const createOrganizationHeirachy = (data: Organization[]) =>
-  data.reduce((acc: Organization[], item: Organization) => {
-    if (!item.parent) {
-      // If the item has no parent, it's a top-level organization
-      acc.push({
-        ...item,
-        children: [],
-      });
-    } else {
-      // If the item has a parent, find the parent in the existing organizations
-      const parent = acc.find((org) => org.id === item.parent);
-      if (parent) {
-        if (!parent.children) {
-          // Initialize children if it's undefined
-          parent.children = [];
-        }
-        // Add the item as a child of its parent
-        parent.children.push(item);
-      }
-    }
-    return acc;
-  }, []);
+export const createOrganizationHierarchy = (
+  data: Organization[]
+): Organization[] => {
+  // map through data and see if the item has a parent (which is a reference of its itemId) if select it otherwise take the itemId
+  const parentsArray = data.map((item) =>
+    item.parent ? item.parent : item.id
+  );
+  const uniqueParentsArray = [...new Set(parentsArray)];
+  // no remap through the data array and append the children to the parents
+  // recurrsively go through the data and find the children of the parent and append them to the parent
+
+  const modifiedArray = uniqueParentsArray.map((parentObj) => {
+    const parent = data.find((item) => item.id === parentObj);
+    const children = data
+      .filter((item) => item.parent === parentObj)
+      .map((item) => ({ id: item.id, displayName: item.displayName }));
+
+    console.log("parentObj", parentObj, children);
+    return;
+  });
+
+  console.log(modifiedArray);
+};

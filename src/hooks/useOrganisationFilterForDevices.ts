@@ -21,7 +21,7 @@ const useFilteredDevices = (
 ) => {
   // State to store filtered devices
   const [filteredDevices, setFilteredDevices] = useState<Device[]>(devices);
-  console.log(selectedOrganization);
+
   useEffect(() => {
     if (devices && selectedOrganization !== null) {
       // Filter devices based on selected organization
