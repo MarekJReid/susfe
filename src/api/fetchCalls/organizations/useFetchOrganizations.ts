@@ -18,15 +18,7 @@ const useFetchOrganizations = (shouldFetchImmediately = true) => {
       // Fetch data from the API endpoint
       const data = await fetchFromAPI("/all-organizations");
 
-      // Organize the fetched data into a hierarchical structure
-      const organizedData = createOrganizationHierarchy(data);
-      console.log(
-        organizedData[0],
-        organizedData[1],
-        organizedData[2],
-        organizedData[3]
-      );
-      setOrganizationsToSend(organizedData);
+      setOrganizationsToSend(data);
       setLoading(false);
       setError(null);
     } catch (err) {
@@ -46,13 +38,8 @@ const useFetchOrganizations = (shouldFetchImmediately = true) => {
     }
   }, [shouldFetchImmediately]);
 
-  // Memoize the organizations using useMemo
-  const organizations = useMemo(() => {
-    return organizationsToSend;
-  }, [organizationsToSend]);
-
   return {
-    organizations, // Return the memoized organizations
+    organizations: organizationsToSend,
     loadingOrganizations,
     errorOrganizations,
     refetchOrganizations: fetchOrganizations, // Function to manually trigger a re-fetch

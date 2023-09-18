@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { Key, useEffect, useRef, useState } from "react";
 import { useOrganizationContext } from "../../../../../contexts/organizationsContext";
 import RecurssiveListElement from "../../../../dynamic/RecurssiveListElement/RecurssiveListElement";
 
@@ -22,6 +22,7 @@ function Dropdown(): JSX.Element {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
+  console.log("organizationsForDropdown", organizationsForDropdown);
 
   const { setSelectedOrganization } = useOrganizationContext();
 
@@ -72,7 +73,22 @@ function Dropdown(): JSX.Element {
           maxHeight: dropdownHeight,
           transition: "max-height 0.3s ease-in-out",
         }}
-      ></ul>
+      >
+        {organizationsForDropdown &&
+          organizationsForDropdown.map((organization) => (
+            <div>
+              {organization === "undefined" ? (
+                <p className="p-6">Undefined</p>
+              ) : (
+                <RecurssiveListElement
+                  key={organization.id}
+                  organisation={organization}
+                  handleOptionSelect={handleOptionSelect}
+                />
+              )}
+            </div>
+          ))}
+      </ul>
     </div>
   );
 }
