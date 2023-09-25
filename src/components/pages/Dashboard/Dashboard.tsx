@@ -1,7 +1,9 @@
+import { useEffect, useState } from "react";
 import { DashboardProps } from "../../../types/component-types";
 import Avatar from "./Avatar/Avatar";
 import Title from "./Titles/Title";
 import UserDetail from "./UserDetail/UserDetail";
+import useFetchUserData from "../../../api/fetchCalls/useFetchUserData";
 
 /**
  * @description This component renders a dashboard displaying user details.
@@ -19,25 +21,29 @@ import UserDetail from "./UserDetail/UserDetail";
  * @date 2nd September 2023
  */
 
-const Dashboard = ({ userData }: DashboardProps): JSX.Element => {
-  const {
-    mail,
-    jobTitle,
-    officeLocation,
-    businessPhones,
-    preferredLanguage,
-    photo,
-    givenName,
-  } = userData;
+const Dashboard = (): JSX.Element => {
+  const [userDataForDashboard, setUserDataForDashboard] = useState<
+    string[] | null
+  >(null);
+
+  const { userData } = useFetchUserData();
+
+  useEffect(() => {
+    // use /user-data endpoint to get user data
+    // setUserData(response.data)
+
+    setUserDataForDashboard(userData);
+  }, [userData]);
+  console.log("userDataForDashboard", userDataForDashboard);
   return (
     <div className="flex pt-24 pl-24 flex flex-col">
-      <Avatar photo={photo} />
+      {/* <Avatar photo={photo} />
       <Title givenName={givenName} />
       <UserDetail label="Email" value={mail} />
       <UserDetail label="Job Title" value={jobTitle} />
       <UserDetail label="Office Location" value={officeLocation} />
       <UserDetail label="Phone" value={businessPhones[0]} />
-      <UserDetail label="Preferred Language" value={preferredLanguage} />
+      <UserDetail label="Preferred Language" value={preferredLanguage} /> */}
     </div>
   );
 };

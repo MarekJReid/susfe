@@ -11,7 +11,7 @@ import App from "./App.tsx";
 import "./styles/global.css";
 import { AuthProvider } from "./contexts/authContext.tsx";
 import { DeviceProvider } from "./contexts/deviceContext.tsx";
-import { OrganizationsProvider } from "./contexts/organizationsContext.tsx";
+import { OrganizationsProvider } from "./contexts/OrganizationsProvider.tsx";
 
 /**
  * Render the root component of the application into the DOM.

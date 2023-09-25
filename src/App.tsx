@@ -18,7 +18,7 @@ import { Welcome } from "./components/pages/Welcome/Welcome";
 import { useAuth } from "./hooks/useAuth";
 import { queryClient } from "./api/react-query/queryProvider";
 import Devices from "./components/pages/Devices/Devices";
-import useOrganizationsForDropdown from "./hooks/organizations/useOrganizationsForDropdown";
+import RedirectComponent from "./api/auth/Redirect";
 
 /**
  * Main application component that serves as the entry point for the application.
@@ -33,6 +33,7 @@ function App(): JSX.Element {
         <Layout>
           <Routes>
             <Route path="/" element={<Welcome welcomeMessage="Wilkommen" />} />
+            <Route path="/redirect" element={<RedirectComponent />} />
             <Route
               path="/dashboard"
               element={

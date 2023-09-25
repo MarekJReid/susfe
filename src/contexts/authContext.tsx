@@ -27,16 +27,17 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, []);
 
   const logout = useCallback(() => {
-    setIsAuthenticated(false);
+    window.location.href = "http://localhost:8000/logout";
   }, []);
 
-  const contextValue: AuthContextProps = useMemo(
+  const contextValue: AuthContextProps = useMemo( 
     () => ({
+      setIsAuthenticated,
       isAuthenticated,
       login,
       logout,
     }),
-    [isAuthenticated, login, logout]
+    [isAuthenticated, login, logout, isAuthenticated]
   );
 
   return (

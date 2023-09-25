@@ -15,7 +15,8 @@ interface WelcomeProps {
 export const Welcome: React.FC<WelcomeProps> = ({ welcomeMessage }) => {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const handleLoginClick = handleLogin(login, navigate);
+  const { setIsAuthenticated } = useAuth();
+  const handleLoginClick = handleLogin(setIsAuthenticated);
   return (
     <div className="flex justify-center items-center w-screen h-[92vh] flex-col">
       <Heading

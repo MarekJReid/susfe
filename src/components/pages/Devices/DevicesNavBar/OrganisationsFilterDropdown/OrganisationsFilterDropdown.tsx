@@ -1,6 +1,7 @@
-import { Key, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useOrganizationContext } from "../../../../../contexts/organizationsContext";
 import RecurssiveListElement from "../../../../dynamic/RecurssiveListElement/RecurssiveListElement";
+import { Organization } from "../../../../../types/device-types";
 
 /**
  * Dropdown component for selecting options.
@@ -22,11 +23,11 @@ function Dropdown(): JSX.Element {
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
   };
-  console.log("organizationsForDropdown", organizationsForDropdown);
 
   const { setSelectedOrganization } = useOrganizationContext();
 
   const handleOptionSelect = (option: string) => {
+    console.log("option", option);
     setSelectedOrganization(option);
     setIsOpen(false);
   };
@@ -39,8 +40,6 @@ function Dropdown(): JSX.Element {
       setDropdownHeight("0px");
     }
   }, [isOpen]);
-
-  console.log(organizationsForDropdown);
 
   return (
     <div className="relative">
@@ -74,20 +73,24 @@ function Dropdown(): JSX.Element {
           transition: "max-height 0.3s ease-in-out",
         }}
       >
-        {organizationsForDropdown &&
-          organizationsForDropdown.map((organization) => (
-            <div>
-              {organization === "undefined" ? (
-                <p className="p-6">Undefined</p>
-              ) : (
-                <RecurssiveListElement
-                  key={organization.id}
-                  organisation={organization}
-                  handleOptionSelect={handleOptionSelect}
-                />
-              )}
-            </div>
-          ))}
+        {organizationsForDropdown?.map((organization: Organization) => (
+          <div className="p-8">
+            {organization === "undefined" ? (
+              <p
+                className="p-6"
+                onClick={() => handleOptionSelect("undefined")}
+              >
+                Undefined
+              </p>
+            ) : (
+              <RecurssiveListElement
+                key={organization.id}
+                organization={organization}
+                handleOptionSelect={handleOptionSelect}
+              />
+            )}
+          </div>
+        ))}
       </ul>
     </div>
   );

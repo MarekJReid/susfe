@@ -1,18 +1,11 @@
-// handleLogin.ts
-
-import { NavigateFunction } from "react-router-dom";
-
 export const handleLogin =
-  (login: () => void, navigate: NavigateFunction) => async () => {
+  (setIsAuthenticated: (value: boolean) => void) => async () => {
     try {
-      // Simulate some login logic here
-      // You can replace this with actual authentication logic
-
-      // Assuming the login is successful
-      await login();
-
-      // Navigate to the dashboard after successful login
-      navigate("/devices");
+      // Redirect the user to the /login endpoint to initiate the MSAL login flow
+      window.location.href = "http://localhost:8000/login";
+      setIsAuthenticated(true);
+      // The Go server will handle the MSAL authentication and redirect back to your application
+      // Once redirected back, you can handle post-login logic if needed
     } catch (error) {
       // Handle login error
       console.error("Login error:", error);

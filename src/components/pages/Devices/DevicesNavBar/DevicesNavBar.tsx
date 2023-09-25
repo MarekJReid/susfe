@@ -24,16 +24,10 @@ const DevicesNavBar = ({
   onTableClick,
   onCardClick,
 }: DevicesNavBarProps): JSX.Element => {
-  const [selectedOrganization, setSelectedOrganization] = useState<string>("");
-
-  const handleOrganizationSelect = (organization: string) => {
-    setSelectedOrganization(organization);
-  };
-
   return (
     <div className="flex justify-between items-center p-4  border text-primary">
       <Heading text={"Devices"} className="text-secondary text-2xl"></Heading>
-      <Dropdown onSelect={handleOrganizationSelect} />
+      <Dropdown />
       <IconWrapper>
         <TableIcon onTableClick={onTableClick} />
         <CardIcon onCardClick={onCardClick} />
