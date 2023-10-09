@@ -71,6 +71,7 @@ export const OrganizationsProvider: React.FC<OrganizationProviderProps> = ({
 
   useEffect(() => {
     const fetchData = async () => {
+      console.log("fetching data");
       const data = await fetchFromAPI("/all-organizations");
       const organizationHierarchyToPush = createOrganizationHierarchy(data);
       setOrganizationHierarchy(organizationHierarchyToPush);

@@ -9,7 +9,6 @@ const useFetchDevices = (shouldFetchImmediately = true) => {
   const [errorDevices, setError] = useState<string | null>(null);
 
   const fetchDevices = async () => {
-    // <-- Added the 'async' keyword here
     setLoading(true);
     try {
       const data = await fetchFromAPI("/all-devices");

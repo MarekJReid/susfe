@@ -15,8 +15,10 @@ interface DeviceProviderProps {
 }
 
 export const DeviceProvider: React.FC<DeviceProviderProps> = ({ children }) => {
-  const { devices, loadingDevices, errorDevices } = useFetchDevices();
-
+  // const { devices, loadingDevices, errorDevices } = useFetchDevices();
+  const devices: never[] = [];
+  const loadingDevices = false;
+  const errorDevices = null;
   return (
     <DeviceContext.Provider
       value={{

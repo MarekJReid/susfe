@@ -13,8 +13,6 @@ interface WelcomeProps {
 }
 
 export const Welcome: React.FC<WelcomeProps> = ({ welcomeMessage }) => {
-  const { login } = useAuth();
-  const navigate = useNavigate();
   const { setIsAuthenticated } = useAuth();
   const handleLoginClick = handleLogin(setIsAuthenticated);
   return (

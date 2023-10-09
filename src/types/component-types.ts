@@ -23,7 +23,7 @@ export interface DashboardProps {
   userData: UserData;
 }
 export interface TitleProps {
-  givenName: string;
+  givenName: string | null | undefined;
 }
 
 export interface UserDetailProps {

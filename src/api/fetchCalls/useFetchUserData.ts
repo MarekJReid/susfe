@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 
-import { fetchFromAPI } from "../api";
+import { fetchFromAuthAPI } from "../authApi";
 
-const useFetchUserData = (shouldFetchImmediately = true) => {
+const useFetchUserData = (shouldFetchImmediately = true, sessionId: string) => {
   const [userData, setUserData] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [errorUserData, setError] = useState<string | null>(null);
@@ -11,7 +11,8 @@ const useFetchUserData = (shouldFetchImmediately = true) => {
     // <-- Added the 'async' keyword here
     setLoading(true);
     try {
-      const data = await fetchFromAPI("/user-data");
+      const data = await fetchFromAuthAPI("/user-info", sessionId);
+      console.log("data", data);
       setUserData(data);
       setLoading(false);
       setError(null);
